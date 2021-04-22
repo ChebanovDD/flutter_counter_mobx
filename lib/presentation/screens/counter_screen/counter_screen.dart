@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../logic/stores/counter_store.dart';
+import 'widgets/animated_circles.dart';
 import 'widgets/plasma_background.dart';
 
 class CounterScreen extends StatefulWidget {
@@ -20,6 +22,15 @@ class _CounterScreenState extends State<CounterScreen> {
         alignment: Alignment.center,
         children: [
           const PlasmaBackground(),
+          Positioned(
+            top: 10.0.h,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                const AnimatedCircles(),
+              ],
+            ),
+          ),
         ],
       ),
     );
