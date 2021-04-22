@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CounterScreen extends StatefulWidget {
-  const CounterScreen({Key key, this.title}) : super(key: key);
-
-  final String title;
+  const CounterScreen();
 
   @override
   _CounterScreenState createState() => _CounterScreenState();
@@ -21,9 +19,6 @@ class _CounterScreenState extends State<CounterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

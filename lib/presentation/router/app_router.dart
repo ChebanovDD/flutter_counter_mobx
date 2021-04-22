@@ -12,7 +12,7 @@ class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Strings.counterScreen:
-        return MaterialPageRoute<Widget>(builder: (_) => const CounterScreen(title: Strings.appTitle,));
+        return MaterialPageRoute<Widget>(builder: (_) => const CounterScreen());
       default:
         throw const RouteException(Strings.exceptionMsgRouteNotFound);
     }

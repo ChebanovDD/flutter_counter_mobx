@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 
 class AppTheme {
   const AppTheme._();
@@ -28,4 +30,17 @@ class AppTheme {
     backgroundColor: darkBackgroundColor,
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );
+
+  static Brightness get currentSystemBrightness =>
+      SchedulerBinding.instance.window.platformBrightness;
+
+  static void setStatusBarAndNavigationBarColors(ThemeMode themeMode) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: themeMode == ThemeMode.light ? Brightness.dark : Brightness.light,
+        systemNavigationBarDividerColor: Colors.transparent,
+        systemNavigationBarColor: themeMode == ThemeMode.light ? lightBackgroundColor : darkBackgroundColor,
+        systemNavigationBarIconBrightness: themeMode == ThemeMode.light ? Brightness.dark : Brightness.light
+    ));
+  }
 }
