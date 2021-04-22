@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+
+import '../../../logic/stores/counter_store.dart';
 
 class CounterScreen extends StatefulWidget {
-  const CounterScreen();
+  const CounterScreen({@required this.counterStore});
+
+  final CounterStore counterStore;
 
   @override
   _CounterScreenState createState() => _CounterScreenState();
 }
 
 class _CounterScreenState extends State<CounterScreen> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,14 +23,16 @@ class _CounterScreenState extends State<CounterScreen> {
             const Text(
               'You have pushed the button this many times:',
             ),
-            Text('$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Observer(
+              builder: (_) => Text('${widget.counterStore.value}',
+                style: Theme.of(context).textTheme.headline4,
+              ),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: widget.counterStore.increment,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

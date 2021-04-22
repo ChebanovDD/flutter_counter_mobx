@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 import 'core/constants/strings.dart';
 import 'core/themes/app_theme.dart';
+import 'logic/stores/counter_store.dart';
 import 'logic/stores/theme_store.dart';
 import 'presentation/router/app_router.dart';
 
@@ -13,7 +15,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CounterApp(themeStore: ThemeStore());
+    return MultiProvider(
+      providers: [
+        Provider<ThemeStore>(create: (_) => ThemeStore()),
+        Provider<CounterStore>(create: (_) => CounterStore())
+      ],
+      child: Consumer<ThemeStore>(
+          builder: (_, store, __) => CounterApp(themeStore: store)
+      ),
+    );
   }
 }
 
