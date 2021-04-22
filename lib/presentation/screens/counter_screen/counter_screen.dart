@@ -3,18 +3,14 @@ import 'package:sizer/sizer.dart';
 
 import '../../../logic/stores/counter_store.dart';
 import 'widgets/animated_circles.dart';
+import 'widgets/counter_value.dart';
 import 'widgets/plasma_background.dart';
 
-class CounterScreen extends StatefulWidget {
+class CounterScreen extends StatelessWidget {
   const CounterScreen({@required this.counterStore});
 
   final CounterStore counterStore;
 
-  @override
-  _CounterScreenState createState() => _CounterScreenState();
-}
-
-class _CounterScreenState extends State<CounterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +24,7 @@ class _CounterScreenState extends State<CounterScreen> {
               alignment: Alignment.center,
               children: [
                 const AnimatedCircles(),
+                CounterValue(counter: counterStore),
               ],
             ),
           ),
