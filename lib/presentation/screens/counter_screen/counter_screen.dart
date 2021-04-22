@@ -3,6 +3,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../../logic/stores/counter_store.dart';
 import 'widgets/animated_circles.dart';
+import 'widgets/counter_slider.dart';
 import 'widgets/counter_value.dart';
 import 'widgets/plasma_background.dart';
 
@@ -27,6 +28,10 @@ class CounterScreen extends StatelessWidget {
                 CounterValue(counter: counterStore),
               ],
             ),
+          ),
+          Positioned(
+            bottom: 5.0.h,
+            child: CounterSlider(counter: counterStore),
           ),
         ],
       ),
