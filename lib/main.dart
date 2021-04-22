@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_counter_mobx/core/themes/app_theme.dart';
 
 import 'core/constants/strings.dart';
 import 'presentation/router/app_router.dart';
@@ -17,6 +18,8 @@ class _CounterAppState extends State<CounterApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: Strings.appTitle,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
       initialRoute: AppRouter.initialRoute,
       onGenerateRoute: AppRouter.onGenerateRoute,
