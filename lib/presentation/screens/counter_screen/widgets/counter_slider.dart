@@ -5,7 +5,7 @@ import 'package:sizer/sizer.dart';
 import '../../../../logic/stores/counter_store.dart';
 
 class CounterSlider extends StatefulWidget {
-  const CounterSlider({@required this.counter});
+  const CounterSlider({required this.counter});
 
   final CounterStore counter;
 
@@ -17,31 +17,31 @@ class _CounterSliderState extends State<CounterSlider> with SingleTickerProvider
   static const Offset _beginTween = Offset(0.0, 0.0);
   static const Offset _endTween = Offset(1.5, 0.0);
 
-  double _startAnimationPosX;
-  Animation<Offset> _animation;
-  AnimationController _controller;
+  late double _startAnimationPosX;
+  late Animation<Offset> _animation;
+  late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = AnimationController(vsync: this, lowerBound: -0.5, upperBound: 0.5);
-    _controller.value = 0.0;
-    _controller.addListener(() {});
+    _animationController = AnimationController(vsync: this, lowerBound: -0.5, upperBound: 0.5)
+    ..value = 0.0
+    ..addListener(() {});
 
-    _animation = Tween<Offset>(begin: _beginTween, end: _endTween).animate(_controller);
+    _animation = Tween<Offset>(begin: _beginTween, end: _endTween).animate(_animationController);
   }
 
   @override
   void dispose() {
-    _controller?.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
   @override
   void didUpdateWidget(CounterSlider oldWidget) {
     super.didUpdateWidget(oldWidget);
-    _animation = Tween<Offset>(begin: _beginTween, end: _endTween).animate(_controller);
+    _animation = Tween<Offset>(begin: _beginTween, end: _endTween).animate(_animationController);
   }
 
   @override
@@ -64,7 +64,7 @@ class _CounterSliderState extends State<CounterSlider> with SingleTickerProvider
                   size: SizerUtil.deviceType == DeviceType.tablet
                       ? 7.0.w
                       : 10.0.w,
-                  color: Theme.of(context).iconTheme.color.withOpacity(0.7),
+                  color: Theme.of(context).iconTheme.color!.withOpacity(0.7),
                 ),
               ),
               Positioned(
@@ -74,7 +74,7 @@ class _CounterSliderState extends State<CounterSlider> with SingleTickerProvider
                   size: SizerUtil.deviceType == DeviceType.tablet
                       ? 7.0.w
                       : 10.0.w,
-                  color: Theme.of(context).iconTheme.color.withOpacity(0.7),
+                  color: Theme.of(context).iconTheme.color!.withOpacity(0.7),
                 ),
               ),
               GestureDetector(
@@ -95,7 +95,7 @@ class _CounterSliderState extends State<CounterSlider> with SingleTickerProvider
                           size: SizerUtil.deviceType == DeviceType.tablet
                               ? 7.0.w
                               : 10.0.w,
-                          color: Theme.of(context).iconTheme.color.withOpacity(0.6),
+                          color: Theme.of(context).iconTheme.color!.withOpacity(0.6),
                         ),
                       ),
                     ),
@@ -110,32 +110,33 @@ class _CounterSliderState extends State<CounterSlider> with SingleTickerProvider
   }
 
   void _onPanStart(DragStartDetails details) {
-    _controller.stop();
-    _controller.value = offsetFromGlobalPos(details.globalPosition);
+    _animationController.stop();
+    _animationController.value = _offsetFromGlobalPos(details.globalPosition);
   }
 
   void _onPanUpdate(DragUpdateDetails details) {
-    _controller.value = offsetFromGlobalPos(details.globalPosition);
+    _animationController.value = _offsetFromGlobalPos(details.globalPosition);
   }
 
   void _onPanEnd(DragEndDetails details) {
-    _controller.stop();
+    _animationController.stop();
 
-    if (_controller.value <= -0.20) {
+    if (_animationController.value <= -0.20) {
       widget.counter.decrement();
-    } else if (_controller.value >= 0.20) {
+    }
+    else if (_animationController.value >= 0.20) {
       widget.counter.increment();
     }
 
     final SpringDescription _kDefaultSpring = SpringDescription
         .withDampingRatio(mass: 0.9, stiffness: 250.0, ratio: 0.6);
 
-    _controller.animateWith(
+    _animationController.animateWith(
         SpringSimulation(_kDefaultSpring, _startAnimationPosX, 0.0, 0.0));
   }
 
-  double offsetFromGlobalPos(Offset globalPosition) {
-    final RenderBox box = context.findRenderObject() as RenderBox;
+  double _offsetFromGlobalPos(Offset globalPosition) {
+    final RenderBox box = context.findRenderObject()! as RenderBox;
     final Offset local = box.globalToLocal(globalPosition);
 
     _startAnimationPosX = ((local.dx * 0.75) / box.size.width) - 0.4;

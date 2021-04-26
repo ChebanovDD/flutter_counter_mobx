@@ -6,7 +6,7 @@ import 'package:sizer/sizer.dart';
 import '../../../../logic/stores/counter_store.dart';
 
 class CounterValue extends StatefulWidget {
-  const CounterValue({@required this.counter});
+  const CounterValue({required this.counter});
 
   final CounterStore counter;
 
@@ -15,11 +15,11 @@ class CounterValue extends StatefulWidget {
 }
 
 class _CounterValueState extends State<CounterValue> {
-  AnimationController _animationController;
+  AnimationController? _animationController;
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animationController?.dispose();
     super.dispose();
   }
 
@@ -32,7 +32,7 @@ class _CounterValueState extends State<CounterValue> {
         manualTrigger: true,
         controller: (controller) => _animationController = controller,
         child: Text('${widget.counter.value}',
-          style: Theme.of(context).textTheme.headline1.copyWith(
+          style: Theme.of(context).textTheme.headline1!.copyWith(
             fontWeight: FontWeight.bold,
             fontSize: 75.0.sp,
           ),

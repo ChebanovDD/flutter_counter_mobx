@@ -7,7 +7,7 @@ import 'logic/stores/theme_store.dart';
 import 'presentation/router/app_router.dart';
 
 class CounterApp extends StatefulWidget {
-  const CounterApp({@required this.themeStore});
+  const CounterApp({required this.themeStore});
 
   final ThemeStore themeStore;
 
@@ -18,8 +18,8 @@ class CounterApp extends StatefulWidget {
 class _CounterAppState extends State<CounterApp> with WidgetsBindingObserver {
   @override
   void initState() {
-    WidgetsBinding.instance.addObserver(this);
     super.initState();
+    WidgetsBinding.instance!.addObserver(this);
   }
 
   @override
@@ -30,7 +30,7 @@ class _CounterAppState extends State<CounterApp> with WidgetsBindingObserver {
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance!.removeObserver(this);
     super.dispose();
   }
 

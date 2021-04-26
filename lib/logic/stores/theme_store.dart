@@ -12,7 +12,7 @@ abstract class _ThemeStore with Store {
   }
 
   @observable
-  ThemeMode themeMode;
+  ThemeMode themeMode = ThemeMode.system;
 
   @action
   void updateAppTheme() {

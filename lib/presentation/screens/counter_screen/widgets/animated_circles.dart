@@ -3,7 +3,7 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:sizer/sizer.dart';
 
 class AnimatedCircles extends StatelessWidget {
-  const AnimatedCircles({Key key}) : super(key: key);
+  const AnimatedCircles();
 
   @override
   Widget build(BuildContext context) {

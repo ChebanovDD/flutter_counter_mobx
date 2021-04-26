@@ -16,14 +16,10 @@ abstract class _CounterStore with Store {
   int value = 0;
 
   @action
-  void increment() {
-    _setValue(value + 1);
-  }
+  void increment() => _setValue(value + 1);
 
   @action
-  void decrement() {
-    _setValue(value - 1);
-  }
+  void decrement() => _setValue(value - 1);
 
   void _setValue(int value) {
     this.value = value;
