@@ -8,23 +8,20 @@ class CounterStore = _CounterStore with _$CounterStore;
 abstract class _CounterStore with Store {
   static const String _valuePrefsKey = 'counterValue';
 
-  _CounterStore() {
-    _loadValue();
-  }
-
   @observable
   int value = 0;
 
   @action
-  void increment() => _setValue(value + 1);
+  void increment() => value++;
 
   @action
-  void decrement() => _setValue(value - 1);
+  void decrement() => value--;
 
-  void _setValue(int value) {
-    this.value = value;
-    _saveValue();
-  }
+  @action
+  void saveValue() => _saveValue();
+
+  @action
+  void loadValue() => _loadValue();
 
   Future<void> _saveValue() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

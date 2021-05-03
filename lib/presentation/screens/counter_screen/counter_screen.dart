@@ -8,7 +8,9 @@ import 'widgets/counter_value.dart';
 import 'widgets/plasma_background.dart';
 
 class CounterScreen extends StatelessWidget {
-  const CounterScreen({required this.counterStore});
+  CounterScreen({required this.counterStore}) {
+    counterStore.loadValue();
+  }
 
   final CounterStore counterStore;
 

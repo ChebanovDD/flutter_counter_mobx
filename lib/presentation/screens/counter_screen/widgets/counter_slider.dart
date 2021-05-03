@@ -123,10 +123,11 @@ class _CounterSliderState extends State<CounterSlider> with SingleTickerProvider
 
     if (_animationController.value <= -0.20) {
       widget.counter.decrement();
-    }
-    else if (_animationController.value >= 0.20) {
+    } else if (_animationController.value >= 0.20) {
       widget.counter.increment();
     }
+
+    widget.counter.saveValue();
 
     final SpringDescription _kDefaultSpring = SpringDescription
         .withDampingRatio(mass: 0.9, stiffness: 250.0, ratio: 0.6);
